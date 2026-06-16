@@ -1,9 +1,23 @@
 import type { Metadata } from 'next'
+import { Oswald, Inter } from 'next/font/google'
 import './globals.css'
 
+const oswald = Oswald({
+  subsets: ['latin'],
+  variable: '--font-oswald',
+  display: 'swap',
+  weight: ['500', '600', '700'],
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
-  title: 'App',
-  description: 'Built with Next.js',
+  title: 'Cidade Viva',
+  description: 'Cultura urbana, ciclismo e lifestyle de Jundiaí, contados por quem vive a cidade.',
 }
 
 export default function RootLayout({
@@ -12,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="pt-BR" className={`${oswald.variable} ${inter.variable}`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   )
