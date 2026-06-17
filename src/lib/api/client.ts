@@ -1,4 +1,4 @@
-class UnauthorizedError extends Error {}
+export class UnauthorizedError extends Error {}
 
 export async function apiFetch<T>(endpoint: string): Promise<T> {
   const response = await fetch(`${process.env.API_URL}${endpoint}`)
@@ -12,5 +12,5 @@ export async function apiFetch<T>(endpoint: string): Promise<T> {
   }
 
   const json = await response.json()
-  return json.data
+  return json
 }

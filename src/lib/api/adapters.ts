@@ -1,15 +1,15 @@
 import type { Author, Comment, Post } from '@/types/blog'
 
-type RawAuthor = Omit<Author, 'id'> & {
+export type RawAuthor = Omit<Author, 'id'> & {
   _id: string
 }
 
-type RawComment = Omit<Comment, 'id' | 'author'> & {
+export type RawComment = Omit<Comment, 'id' | 'author'> & {
   _id: string
   author: RawAuthor
 }
 
-type RawPost = Omit<Post, 'id' | 'author'> & {
+export type RawPost = Omit<Post, 'id' | 'author'> & {
   _id: string
   author: RawAuthor | null
 }

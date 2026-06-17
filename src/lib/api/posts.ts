@@ -12,13 +12,17 @@ export async function getPosts(params?: { category?: string; page?: string }): P
     query.set('page', params.page)
   }
 
-  const { posts } = await apiFetch<{ posts: RawPost[] }>(`/api/v1/posts?${query.toString()}`)
+  const {
+    data: { posts },
+  } = await apiFetch<{ data: { posts: RawPost[] } }>(`/api/v1/posts?${query.toString()}`)
 
   return posts.map(toPost)
 }
 
 export async function getPostBySlug(slug: string): Promise<Post> {
-  const { post } = await apiFetch<{ post: RawPost }>(`/api/v1/posts/${slug}`)
+  const {
+    data: { post },
+  } = await apiFetch<{ data: { post: RawPost } }>(`/api/v1/posts/${slug}`)
 
   return toPost(post)
 }
