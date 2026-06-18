@@ -1,5 +1,3 @@
-//Author, Category, Post, Comment, Paginated<T>
-
 export type Author = {
   id: string
   name: string

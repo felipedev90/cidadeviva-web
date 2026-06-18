@@ -1,14 +1,7 @@
-export type PageName = {
-  title: string
-  highlight: string
-}
-
 export type NavLink = {
   label: string
   href: string
 }
-
-export const PAGE_NAME = [{ title: 'Cidade', highlight: 'Viva' }] as const satisfies PageName[]
 
 export const NAV_BAR_DATA = [
   { label: 'Início', href: '/' },
