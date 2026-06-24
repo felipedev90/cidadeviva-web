@@ -1,6 +1,7 @@
 export class UnauthorizedError extends Error {}
 
 export async function apiFetch<T>(endpoint: string): Promise<T> {
+  console.log('API_URL:', process.env.API_URL)
   const response = await fetch(`${process.env.API_URL}${endpoint}`)
 
   if (response.status === 401) {
