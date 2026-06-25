@@ -1,18 +1,9 @@
 import type { Post } from '@/types/blog'
 import Link from 'next/link'
 import Image from 'next/image'
+import { formattedDate } from '@/utils/formattedDate'
 
 export function PostCard({ post }: { post: Post }) {
-  const date = new Date(post.createdAt)
-  const formattedDate = date
-    .toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-    })
-    .replace(/ de /g, ' ')
-    .replace('.', '')
-
   return (
     <Link
       href={`/posts/${post.slug}`}
@@ -31,8 +22,7 @@ export function PostCard({ post }: { post: Post }) {
 
       <div className="p-6 flex flex-col gap-4">
         <div className="text-muted font-sans text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
-          <span>{formattedDate}</span>
-          <span>&middot;</span>
+          <span>{formattedDate(post.createdAt)}</span>
         </div>
 
         <h2 className="text-ink font-display text-2xl font-bold uppercase leading-tight">
