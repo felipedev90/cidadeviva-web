@@ -9,12 +9,17 @@ export default async function Home({
   searchParams: Promise<{ category?: string; page?: string }>
 }) {
   const params = await searchParams
-  const posts = await getPosts(params)
+  const { items: posts, totalPages } = await getPosts(params)
 
   return (
     <main>
       <Hero />
-      <PostList posts={posts} />
+      <PostList
+        posts={posts}
+        activeCategory={params.category}
+        totalPages={totalPages}
+        currentPage={Number(params.page) || 1}
+      />
     </main>
   )
 }
