@@ -14,7 +14,7 @@ export default async function Home({
   return (
     <main>
       <Hero />
-      <PostList posts={posts} />
+      <PostList posts={posts} activeCategory={params.category} />
     </main>
   )
 }
