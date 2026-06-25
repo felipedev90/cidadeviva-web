@@ -2,8 +2,12 @@ import { apiFetch } from './client'
 import { toPost } from './adapters'
 import type { RawPost } from './adapters'
 import type { Post } from '@/types/blog'
+import type { Paginated } from '@/types/blog'
 
-export async function getPosts(params?: { category?: string; page?: string }): Promise<Post[]> {
+export async function getPosts(params?: {
+  category?: string
+  page?: string
+}): Promise<Paginated<Post>> {
   const query = new URLSearchParams()
   if (params?.category) {
     query.set('category', params.category)
@@ -14,9 +18,16 @@ export async function getPosts(params?: { category?: string; page?: string }): P
 
   const {
     data: { posts },
-  } = await apiFetch<{ data: { posts: RawPost[] } }>(`/api/v1/posts?${query.toString()}`)
+    pagination,
+  } = await apiFetch<{
+    data: { posts: RawPost[] }
+    pagination: { total: number; page: number; limit: number; totalPages: number }
+  }>(`/api/v1/posts?${query.toString()}`)
 
-  return posts.map(toPost)
+  return {
+    items: posts.map(toPost),
+    ...pagination,
+  }
 }
 
 export async function getPostBySlug(slug: string): Promise<Post> {

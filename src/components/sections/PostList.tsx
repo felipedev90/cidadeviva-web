@@ -6,11 +6,13 @@ import Link from 'next/link'
 type PostListProps = {
   posts: Post[]
   activeCategory?: string | undefined
+  totalPages: number
+  currentPage: number
 }
 
 const ALL_LINKS = [{ label: 'Todos', href: '/', category: undefined }, ...HERO_LINKS]
 
-export function PostList({ posts, activeCategory }: PostListProps) {
+export function PostList({ posts, activeCategory, totalPages, currentPage }: PostListProps) {
   return (
     <section id="posts" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="font-display uppercase flex items-center justify-between gap-4">
@@ -50,6 +52,35 @@ export function PostList({ posts, activeCategory }: PostListProps) {
         {posts.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}
+      </div>
+      <div className="mt-10 flex justify-center gap-4">
+        {currentPage > 1 && (
+          <Link
+            href={`/?category=${activeCategory || ''}&page=${currentPage - 1}`}
+            className="px-4 py-2 font-sans font-bold text-sm tracking-wider uppercase bg-surface text-ink hover:bg-accent-hover hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors"
+          >
+            {'<'}
+          </Link>
+        )}
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <Link
+            key={page}
+            href={`/?category=${activeCategory || ''}&page=${page}`}
+            className={`${
+              page === currentPage ? 'bg-primary text-white' : 'bg-surface text-ink'
+            } px-4 py-2 font-sans font-bold text-sm tracking-wider uppercase hover:bg-accent-hover hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors`}
+          >
+            {page}
+          </Link>
+        ))}
+        {currentPage < totalPages && (
+          <Link
+            href={`/?category=${activeCategory || ''}&page=${currentPage + 1}`}
+            className="px-4 py-2 font-sans font-bold text-sm tracking-wider uppercase bg-surface text-ink/80 hover:bg-accent-hover hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors"
+          >
+            {'>'}
+          </Link>
+        )}
       </div>
     </section>
   )
