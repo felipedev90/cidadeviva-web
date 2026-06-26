@@ -1,6 +1,5 @@
 import { Hero } from '@/components/sections/Hero'
 import { PostList } from '@/components/sections/PostList'
-
 import { getPosts } from '@/lib/api/posts'
 
 export default async function Home({

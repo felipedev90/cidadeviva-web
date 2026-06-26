@@ -1,10 +1,12 @@
-import { HERO_IMAGE } from '@/data/hero'
-import { getPostBySlug } from '@/lib/api/posts'
-import { getCommentsByPost } from '@/lib/api/comments'
+import { ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
-import { formattedDate } from '@/utils/formattedDate'
+import Markdown from 'react-markdown'
+
+import { HERO_IMAGE } from '@/data/hero'
+import { getCommentsByPost } from '@/lib/api/comments'
+import { getPostBySlug } from '@/lib/api/posts'
+import { formattedDate } from '@/lib/formattedDate/formattedDate'
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -59,10 +61,32 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         {post.excerpt && (
           <p className="mb-10 text-xl font-medium leading-relaxed text-ink">{post.excerpt}</p>
         )}
-
-        <div className="font-sans text-lg leading-relaxed text-body">{post.content}</div>
+        <div className="prose prose-lg max-w-none">
+          <Markdown>{post.content}</Markdown>
+        </div>
         <div className="mt-16 border-t border-border pt-8">
-          <p className="font-sans font-bold text-ink">{comments.items.length || 0} comentários</p>
+          {comments.items.length < 1 ? (
+            <>
+              <p className="font-sans font-bold text-ink">Nenhum comentário.</p>
+            </>
+          ) : (
+            <>
+              <p className="font-sans font-bold text-ink">
+                {comments.items.length || 0} comentários
+              </p>
+              {comments.items.map((comment) => (
+                <div key={comment.id} className="mt-4 border border-muted/20 rounded-xl shadow-xl">
+                  <p className="text-md text-ink/80 p-4">{comment.content}</p>
+                  <div className=" flex flex-col justify-end items-end mt-6 border-t border-muted/50 py-4 bg-primary ">
+                    <p className="font-sans font-bold text-on-dark px-4">{comment.author.name}</p>
+                    <span className="text-sm text-on-dark/60 px-4">
+                      {formattedDate(comment.createdAt)}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </article>
     </main>

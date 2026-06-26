@@ -1,7 +1,8 @@
-import type { Post } from '@/types/blog'
-import Link from 'next/link'
 import Image from 'next/image'
-import { formattedDate } from '@/utils/formattedDate'
+import Link from 'next/link'
+
+import { formattedDate } from '@/lib/formattedDate/formattedDate'
+import type { Post } from '@/types/blog'
 
 export function PostCard({ post }: { post: Post }) {
   return (

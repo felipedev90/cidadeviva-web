@@ -1,7 +1,8 @@
+import { Globe, Handshake, Workflow } from 'lucide-react'
 import Link from 'next/link'
-import { NAV_BAR_DATA } from '@/data/nav'
+
 import { INSTITUTIONAL_LINKS, SOCIAL_MEDIA_LINKS } from '@/data/footer'
-import { Globe, Workflow, Handshake } from 'lucide-react'
+import { NAV_BAR_DATA } from '@/data/nav'
 
 const ICON_MAP = {
   github: Workflow,

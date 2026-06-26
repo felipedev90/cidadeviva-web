@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+
 import { HERO_IMAGE, HERO_LINKS } from '@/data/hero'
 
 export function Hero() {

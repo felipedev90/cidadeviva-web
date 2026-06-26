@@ -1,7 +1,8 @@
-import { PostCard } from '@/components/ui/PostCard'
-import type { Post } from '@/types/blog'
-import { HERO_LINKS } from '@/data/hero'
 import Link from 'next/link'
+
+import { PostCard } from '@/components/ui/PostCard'
+import { HERO_LINKS } from '@/data/hero'
+import type { Post } from '@/types/blog'
 
 type PostListProps = {
   posts: Post[]
