@@ -1,8 +1,9 @@
-import { apiFetch } from './client'
-import { toPost } from './adapters'
-import type { RawPost } from './adapters'
 import type { Post } from '@/types/blog'
 import type { Paginated } from '@/types/blog'
+
+import type { RawPost } from './adapters'
+import { toPost } from './adapters'
+import { apiFetch } from './client'
 
 export async function getPosts(params?: {
   category?: string

@@ -1,7 +1,8 @@
-import { apiFetch } from './client'
-import { toComment } from './adapters'
-import type { RawComment } from './adapters'
 import type { Comment, Paginated } from '@/types/blog'
+
+import type { RawComment } from './adapters'
+import { toComment } from './adapters'
+import { apiFetch } from './client'
 
 type RawCommentsResponse = {
   data: {

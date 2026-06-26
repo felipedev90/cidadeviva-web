@@ -1,7 +1,8 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { NAV_BAR_DATA } from '@/data/nav'
 import { Search } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+
+import { NAV_BAR_DATA } from '@/data/nav'
 
 export function NavBar() {
   return (
