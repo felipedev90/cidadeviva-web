@@ -1,5 +1,6 @@
 import { Hero } from '@/components/sections/Hero'
 import { PostList } from '@/components/sections/PostList'
+import { SerraHighlight } from '@/components/sections/SerraHighlight'
 import { getPosts } from '@/lib/api/posts'
 
 export default async function Home({
@@ -19,6 +20,7 @@ export default async function Home({
         totalPages={totalPages}
         currentPage={Number(params.page) || 1}
       />
+      <SerraHighlight />
     </main>
   )
 }
