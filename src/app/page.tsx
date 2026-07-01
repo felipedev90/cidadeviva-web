@@ -1,3 +1,4 @@
+import { About } from '@/components/sections/About'
 import { Explore } from '@/components/sections/Explore'
 import { Hero } from '@/components/sections/Hero'
 import { PostList } from '@/components/sections/PostList'
@@ -28,6 +29,7 @@ export default async function Home({
       <SerraHighlight />
       <WeeklyHighlight posts={weeklyPosts} />
       <Explore />
+      <About />
     </main>
   )
 }
