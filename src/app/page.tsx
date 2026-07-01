@@ -1,6 +1,7 @@
 import { About } from '@/components/sections/About'
 import { Explore } from '@/components/sections/Explore'
 import { Hero } from '@/components/sections/Hero'
+import { Newsletter } from '@/components/sections/Newsletter'
 import { PostList } from '@/components/sections/PostList'
 import { SerraHighlight } from '@/components/sections/SerraHighlight'
 import { WeeklyHighlight } from '@/components/sections/WeeklyHighlight'
@@ -30,6 +31,7 @@ export default async function Home({
       <WeeklyHighlight posts={weeklyPosts} />
       <Explore />
       <About />
+      <Newsletter />
     </main>
   )
 }
