@@ -41,7 +41,7 @@ export function NavBar() {
           priority
           className="rounded-full hidden md:block"
         />
-        <div>
+        <div className="z-50">
           <Link
             href="/"
             className="font-display text-4xl text-on-dark uppercase flex gap-2 tracking-wider"
@@ -75,7 +75,7 @@ export function NavBar() {
         >
           Login
         </Link>
-        <Link href="/auth/login" className="text-on-dark lg:hidden">
+        <Link href="/auth/login" className="text-on-dark lg:hidden z-50">
           <User size={24} />
         </Link>
         <Link
@@ -101,13 +101,13 @@ export function NavBar() {
           aria-modal="true"
           aria-label="Menu de navegação"
           aria-hidden={!isOpen}
-          className={`bg-primary fixed inset-0 z-40 transition-transform duration-300 lg:hidden ${
+          className={`bg-transparent fixed inset-0 z-40 transition-transform duration-300 lg:hidden ${
             isOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
           <nav
             aria-label="Navegação mobile"
-            className="flex h-full flex-col items-center pt-32 gap-8"
+            className="bg-primary h-screen flex flex-col items-center justify-center pt-32 gap-8"
           >
             {NAV_BAR_DATA.map((link, index) => (
               <Link
