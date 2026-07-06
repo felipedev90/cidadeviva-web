@@ -46,10 +46,10 @@ export function Explore() {
         <div className="flex flex-col justify-center w-full max-w-sm mx-auto lg:mx-0">
           <ul className="flex flex-col w-full mb-10">
             {HERO_LINKS.map((link) => (
-              <li key={link.href} className={`border-b border-primary/20`}>
+              <li key={link.href} className="border-b border-primary/20">
                 <Link
                   href={link.href}
-                  className="block py-4 text-primary font-display text-xl font-bold uppercase tracking-wide hover:text-on-dark transition-colors duration-300"
+                  className="block text-center lg:text-start py-4 text-primary font-display text-xl font-bold uppercase tracking-wide hover:text-on-dark transition-colors duration-300"
                 >
                   {link.label}
                 </Link>
@@ -59,7 +59,7 @@ export function Explore() {
 
           <Link
             href="/"
-            className="bg-primary text-on-dark font-sans text-xs sm:text-sm font-bold uppercase tracking-[0.2em] py-4 px-8 self-start hover:bg-primary-hover     transition-colors duration-300"
+            className="bg-primary text-on-dark font-sans text-xs sm:text-sm font-bold uppercase tracking-[0.2em] py-4 px-8 self-center lg:self-start hover:bg-primary-hover transition-colors duration-300"
           >
             Ver todos os posts
           </Link>
