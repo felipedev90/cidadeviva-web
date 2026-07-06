@@ -10,7 +10,7 @@ export function Hero() {
       className="relative flex h-screen items-center justify-center overflow-hidden pt-20 pb-16 md:pb-0"
     >
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 z-10 bg-linear-to-l from-transparent via-ink/40 to-ink/10" />
+        <div className="absolute inset-0 z-10 bg-linear-to-l from-ink/60 lg:from-transparent via-ink/60 to-ink/60 lg:via-ink/60 lg:to-ink/50" />
         <Image
           src={HERO_IMAGE.src}
           alt={HERO_IMAGE.alt}
@@ -22,11 +22,11 @@ export function Hero() {
       </div>
 
       <div className="relative z-20 mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-12">
-        <div className="md:col-span-8">
+        <div className=" md:col-span-8">
           <span className="font-display tracking-widest font-extrabold uppercase text-accent-hover">
             Blog de jundiaí
           </span>
-          <h1 className="font-display uppercase text-on-dark text-[3rem] leading-tight mb-2 lg:text-9xl">
+          <h1 className="font-display uppercase text-on-dark text-6xl leading-tight mb-2 lg:text-9xl">
             A cidade <br />
             está <span className="text-accent">viva</span>
           </h1>
@@ -34,7 +34,7 @@ export function Hero() {
             Histórias, rolês e rotas da Terra da uva. Da serra do Japi ao centro histórico, com
             olhar de quem vive Jundiaí todo dia.
           </p>
-          <div className="flex gap-5">
+          <div className="flex-col lg:flex-row gap-5 items-center hidden lg:flex">
             {HERO_LINKS.map((item) => (
               <Link
                 key={item.href}
