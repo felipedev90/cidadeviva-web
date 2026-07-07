@@ -63,7 +63,7 @@ export default function RegisterPage() {
         </div>
 
         {/* Lado direito — formulário */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 py-16 bg-primary">
+        <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 py-8 lg:py-16 bg-primary">
           <div className="max-w-sm mx-auto w-full">
             <Link
               href="/"
@@ -88,7 +88,7 @@ export default function RegisterPage() {
                   type="text"
                   placeholder="Seu nome"
                   {...register('name')}
-                  className="border border-border px-4 py-3 font-sans text-sm text-on-dark focus:outline-none focus:border-primary"
+                  className="border border-border px-4 py-3 font-sans text-sm text-on-dark focus:outline-none focus:border-accent"
                 />
                 {errors.name && <span className="text-red-500 text-xs">{errors.name.message}</span>}
               </div>
@@ -100,7 +100,7 @@ export default function RegisterPage() {
                   type="email"
                   placeholder="voce@email.com"
                   {...register('email')}
-                  className="border border-border px-4 py-3 font-sans text-sm text-on-dark focus:outline-none focus:border-primary"
+                  className="border border-border px-4 py-3 font-sans text-sm text-on-dark focus:outline-none focus:border-accent"
                 />
                 {errors.email && (
                   <span className="text-red-500 text-xs">{errors.email.message}</span>
@@ -115,7 +115,7 @@ export default function RegisterPage() {
                   type="password"
                   placeholder="••••••••"
                   {...register('password')}
-                  className="border border-border px-4 py-3 font-sans text-sm text-on-dark focus:outline-none focus:border-primary"
+                  className="border border-border px-4 py-3 font-sans text-sm text-on-dark focus:outline-none focus:border-accent"
                 />
                 {errors.password && (
                   <span className="text-red-500 text-xs">{errors.password.message}</span>
