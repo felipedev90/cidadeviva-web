@@ -1,6 +1,7 @@
 import { ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import Markdown from 'react-markdown'
 
 import { HERO_IMAGE } from '@/data/hero'
@@ -10,7 +11,14 @@ import { formattedDate } from '@/lib/formattedDate/formattedDate'
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const post = await getPostBySlug(slug)
+
+  let post
+  try {
+    post = await getPostBySlug(slug)
+  } catch {
+    notFound()
+  }
+
   const comments = await getCommentsByPost(post.id)
 
   return (
