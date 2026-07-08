@@ -1,13 +1,18 @@
 'use client'
 
-import { Menu, Search, User, X } from 'lucide-react'
+import { LogOut, Menu, NotebookPen, Search, User, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
 import { NAV_BAR_DATA } from '@/data/nav'
+import { logout } from '@/lib/actions/logout'
 
-export function NavBar() {
+type NavBarProps = {
+  user: { name: string; email: string } | null
+}
+
+export function NavBar({ user }: NavBarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const firstLinkRef = useRef<HTMLAnchorElement>(null)
 
@@ -69,21 +74,64 @@ export function NavBar() {
         <Search />
       </button>
       <div className="flex items-center gap-6">
-        <Link
-          href="/auth/login"
-          className="text-on-dark font-bold font-sans text-xl hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors hidden lg:flex"
-        >
-          Login
-        </Link>
-        <Link href="/auth/login" className="text-on-dark lg:hidden z-50">
-          <User size={24} />
-        </Link>
-        <Link
-          href="/auth/register"
-          className="font-sans font-bold text-lg text-ink tracking-wider uppercase bg-accent px-5 py-4 hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors hidden lg:flex"
-        >
-          Escrever
-        </Link>
+        {user ? (
+          <>
+            <Link href="/dashboard" className="text-on-dark lg:hidden z-50">
+              <User size={24} />
+            </Link>
+            <div className="hidden lg:flex items-center gap-8">
+              <div className="flex items-start flex-col">
+                <span className="text-on-dark font-light font-sans uppercase tracking-widest text-md hidden lg:flex">
+                  {' '}
+                  Olá,{' '}
+                </span>
+                <span className="text-on-dark font-sans text-xl hidden lg:flex">{user.name}</span>
+                <div className="flex justify-center items-center gap-4 mt-1">
+                  <Link
+                    href="/dashboard"
+                    className="text-on-dark font-sans font-light text-md hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors hidden lg:flex items-center cursor-pointer"
+                  >
+                    Meu painel
+                    <NotebookPen size={16} className="ml-1" />
+                  </Link>
+                  <form action={logout}>
+                    <button
+                      type="submit"
+                      className="text-on-dark font-sans font-light text-md hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors hidden lg:flex items-center cursor-pointer"
+                    >
+                      Sair
+                      <LogOut size={16} className="ml-1" />
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <Link
+                href="/dashboard/posts/new"
+                className="font-sans font-bold text-lg text-ink tracking-wider uppercase bg-accent px-5 py-4 hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors hidden lg:flex"
+              >
+                Escrever
+              </Link>
+            </div>
+          </>
+        ) : (
+          <>
+            <Link
+              href="/auth/login"
+              className="text-on-dark font-bold font-sans text-xl hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors hidden lg:flex"
+            >
+              Login
+            </Link>
+            <Link href="/auth/login" className="text-on-dark lg:hidden z-50">
+              <User size={24} />
+            </Link>
+            <Link
+              href="/auth/register"
+              className="font-sans font-bold text-lg text-ink tracking-wider uppercase bg-accent px-5 py-4 hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors hidden lg:flex"
+            >
+              Escrever
+            </Link>
+          </>
+        )}
 
         <button
           className="relative z-50 text-on-dark lg:hidden"

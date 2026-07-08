@@ -42,6 +42,12 @@ export function DashboardNav({ userName }: DashboardNavProps) {
           >
             Ver site
           </Link>
+          <Link
+            href="/dashboard"
+            className="font-sans text-sm text-on-dark/70 hover:text-on-dark transition-colors hidden lg:block mr-8"
+          >
+            Dashboard
+          </Link>
           <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center">
             <span className="font-display text-xs font-bold text-ink">{initials}</span>
           </div>
