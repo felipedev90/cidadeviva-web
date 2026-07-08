@@ -1,14 +1,13 @@
 import { Pen, Trash2 as TrashIcon } from 'lucide-react'
 import Link from 'next/link'
 
+import { DeletePostButton } from '@/components/ui/DeletePostButton'
 import { getMyPosts } from '@/lib/api/posts'
 import { getUser } from '@/lib/api/user'
 import { formattedDate } from '@/lib/formattedDate/formattedDate'
 
 export default async function DashboardPage() {
   const [{ items: posts }, user] = await Promise.all([getMyPosts(), getUser()])
-  console.log('user:', user)
-  console.log('posts:', posts)
 
   const published = posts.filter((p) => p.published).length
   const drafts = posts.filter((p) => !p.published).length
@@ -130,12 +129,7 @@ export default async function DashboardPage() {
                     >
                       <Pen className="w-5 h-5" />
                     </Link>
-                    <button
-                      className="font-sans text-sm text-red-500 hover:text-red-700 transition-colors cursor-pointer"
-                      aria-label={`Excluir post ${post.title}`}
-                    >
-                      <TrashIcon className="w-5 h-5" />
-                    </button>
+                    <DeletePostButton slug={post.slug} postTitle={post.title} />
                   </div>
                 </td>
               </tr>
