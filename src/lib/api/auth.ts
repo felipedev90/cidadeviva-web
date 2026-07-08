@@ -6,3 +6,8 @@ export async function clearAuthAndRedirect(): Promise<never> {
   cookieStore.delete('auth-token')
   redirect('/auth/login')
 }
+
+export async function getAuthToken(): Promise<string | undefined> {
+  const cookieStore = await cookies()
+  return cookieStore.get('auth-token')?.value
+}
