@@ -6,7 +6,7 @@ import { getUser } from '@/lib/api/user'
 import { formattedDate } from '@/lib/formattedDate/formattedDate'
 
 export default async function DashboardPage() {
-  const [{ items: posts, totalPages }, user] = await Promise.all([getMyPosts(), getUser()])
+  const [{ items: posts }, user] = await Promise.all([getMyPosts(), getUser()])
   console.log('user:', user)
   console.log('posts:', posts)
 
