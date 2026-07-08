@@ -46,3 +46,28 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ sl
   const data = await response.json()
   return NextResponse.json({ success: true, slug: data.data.post.slug })
 }
+
+export async function DELETE(_req: Request, { params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const cookieStore = await cookies()
+  const token = cookieStore.get('auth-token')?.value
+
+  if (!token) {
+    return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+  }
+
+  const response = await fetch(`${process.env.API_URL}/api/v1/posts/${slug}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  if (!response.ok) {
+    const errorData = await response.json()
+    console.log('erro DELETE:', errorData)
+    return NextResponse.json({ error: errorData.message }, { status: response.status })
+  }
+
+  return NextResponse.json({ success: true })
+}
