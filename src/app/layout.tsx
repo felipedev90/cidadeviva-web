@@ -3,9 +3,6 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter, Oswald } from 'next/font/google'
 
-import { Footer } from '@/components/layout/Footer'
-import { NavBar } from '@/components/layout/NavBar'
-
 const oswald = Oswald({
   subsets: ['latin'],
   variable: '--font-oswald',
@@ -31,11 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${oswald.variable} ${inter.variable}`}>
-      <body className="min-h-full flex flex-col">
-        <NavBar />
-        {children}
-        <Footer />
-      </body>
+      <body className="min-h-full flex flex-col ">{children}</body>
     </html>
   )
 }
