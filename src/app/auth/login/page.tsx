@@ -57,6 +57,7 @@ export default function LoginPage() {
             alt="Imagem de login do Cidade Viva"
             fill
             quality={85}
+            priority
             className="object-cover object-[20%_center]"
           />
         </div>

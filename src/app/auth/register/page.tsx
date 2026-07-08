@@ -58,6 +58,7 @@ export default function RegisterPage() {
             alt="Imagem de registro do Cidade Viva"
             fill
             quality={85}
+            priority
             className="object-cover object-[20%_center]"
           />
         </div>
