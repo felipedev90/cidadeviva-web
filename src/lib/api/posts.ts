@@ -58,3 +58,11 @@ export async function getPostBySlug(slug: string): Promise<Post> {
 
   return toPost(post)
 }
+
+export async function getMyPostBySlug(slug: string): Promise<Post> {
+  const {
+    data: { post },
+  } = await apiFetch<{ data: { post: RawPost } }>(`/api/v1/posts/mine/${slug}`)
+
+  return toPost(post)
+}
