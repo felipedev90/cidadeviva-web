@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers'
 
-export class UnauthorizedError extends Error {}
+import { clearAuthAndRedirect } from './auth'
 
 export async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const cookieStore = await cookies()
@@ -23,7 +23,7 @@ export async function apiFetch<T>(endpoint: string, options?: RequestInit): Prom
   })
 
   if (response.status === 401) {
-    throw new UnauthorizedError()
+    await clearAuthAndRedirect()
   }
 
   if (!response.ok) {
