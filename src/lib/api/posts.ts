@@ -31,6 +31,26 @@ export async function getPosts(params?: {
   }
 }
 
+export async function getMyPosts(page?: string): Promise<Paginated<Post>> {
+  const query = new URLSearchParams()
+  if (page) {
+    query.set('page', page)
+  }
+
+  const {
+    data: { posts },
+    pagination,
+  } = await apiFetch<{
+    data: { posts: RawPost[] }
+    pagination: { total: number; page: number; limit: number; totalPages: number }
+  }>(`/api/v1/posts/mine?${query.toString()}`)
+
+  return {
+    items: posts.map(toPost),
+    ...pagination,
+  }
+}
+
 export async function getPostBySlug(slug: string): Promise<Post> {
   const {
     data: { post },
