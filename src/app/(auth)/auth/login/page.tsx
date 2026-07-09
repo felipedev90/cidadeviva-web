@@ -58,6 +58,7 @@ export default function LoginPage() {
             fill
             quality={85}
             priority
+            sizes="(min-width: 768px) 448px, 100vw"
             className="object-cover object-[20%_center]"
           />
         </div>

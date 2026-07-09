@@ -19,6 +19,7 @@ export function Explore() {
               src="/images/explore/explore_01.webp"
               alt="Vinicola em Jundiaí"
               fill
+              sizes="(min-width: 1024px) 380px, 45vw"
               className="object-cover"
             />
           </div>
@@ -28,6 +29,7 @@ export function Explore() {
               src="/images/explore/explore_02.webp"
               alt="Avenida Nove de Julho em Jundiaí"
               fill
+              sizes="(min-width: 1024px) 380px, 45vw"
               className="object-cover"
             />
           </div>
@@ -37,6 +39,7 @@ export function Explore() {
               src="/images/explore/explore_03.webp"
               alt="Festa da Uva de Jundiaí"
               fill
+              sizes="(min-width: 1024px) 380px, 45vw"
               className="object-cover"
             />
           </div>

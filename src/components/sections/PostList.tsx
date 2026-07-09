@@ -19,7 +19,7 @@ export function PostList({ posts, activeCategory, totalPages, currentPage }: Pos
     <section id="posts" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="font-display uppercase flex flex-col lg:flex-row items-center lg:justify-between gap-4">
         <div className="flex flex-col items-center lg:items-start gap-2">
-          <p className="text-accent-hover/90">Atualizado toda semana</p>
+          <p className="text-[#776040]">Atualizado toda semana</p>
           <h2 className="text-ink text-5xl font-bold leading-relaxed tracking-wide text-center lg:text-left">
             Últimas de Jundiaí
           </h2>
