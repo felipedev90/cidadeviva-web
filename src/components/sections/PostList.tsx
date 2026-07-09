@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { PostCard } from '@/components/ui/PostCard'
 import { HERO_LINKS } from '@/data/hero'
+import { cn } from '@/lib/cn/cn'
 import type { Post } from '@/types/blog'
 
 type PostListProps = {
@@ -28,11 +29,12 @@ export function PostList({ posts, activeCategory, totalPages, currentPage }: Pos
             <Link
               key={link.href}
               href={link.href}
-              className={`${
+              className={cn(
+                'font-sans font-bold text-sm tracking-wider uppercase hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors',
                 activeCategory === link.category
                   ? 'border-b-4 border-accent-hover text-ink font-bold'
-                  : 'bg-surface/10'
-              } font-sans font-bold text-sm tracking-wider uppercase hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors `}
+                  : 'bg-surface/10',
+              )}
             >
               {link.label}
             </Link>
@@ -67,9 +69,10 @@ export function PostList({ posts, activeCategory, totalPages, currentPage }: Pos
           <Link
             key={page}
             href={`/?category=${activeCategory || ''}&page=${page}`}
-            className={`${
-              page === currentPage ? 'bg-primary text-white' : 'bg-surface text-ink'
-            } px-4 py-2 font-sans font-bold text-sm tracking-wider uppercase hover:bg-accent-hover hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors`}
+            className={cn(
+              'px-4 py-2 font-sans font-bold text-sm tracking-wider uppercase hover:bg-accent-hover hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors',
+              page === currentPage ? 'bg-primary text-white' : 'bg-surface text-ink',
+            )}
           >
             {page}
           </Link>
