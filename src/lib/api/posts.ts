@@ -1,3 +1,5 @@
+import { cache } from 'react'
+
 import type { Post } from '@/types/blog'
 import type { Paginated } from '@/types/blog'
 
@@ -51,13 +53,14 @@ export async function getMyPosts(page?: string): Promise<Paginated<Post>> {
   }
 }
 
-export async function getPostBySlug(slug: string): Promise<Post> {
+// Cache é usado para evitar que a função seja chamada novamente com os mesmos argumentos, melhorando a performance.
+export const getPostBySlug = cache(async function getPostBySlug(slug: string): Promise<Post> {
   const {
     data: { post },
   } = await apiFetch<{ data: { post: RawPost } }>(`/api/v1/posts/${slug}`)
 
   return toPost(post)
-}
+})
 
 export async function getMyPostBySlug(slug: string): Promise<Post> {
   const {

@@ -1,13 +1,49 @@
 import { ArrowLeft } from 'lucide-react'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Markdown from 'react-markdown'
 
+import { CommentsSection } from '@/components/sections/CommentSection'
 import { HERO_IMAGE } from '@/data/hero'
+import { getAuthToken } from '@/lib/api/auth'
 import { getCommentsByPost } from '@/lib/api/comments'
 import { getPostBySlug } from '@/lib/api/posts'
+import { getUser } from '@/lib/api/user'
 import { formattedDate } from '@/lib/formattedDate/formattedDate'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+
+  let post
+  try {
+    post = await getPostBySlug(slug)
+  } catch {
+    notFound()
+  }
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      images: [
+        {
+          url: post.coverImage || HERO_IMAGE.src,
+          width: 1200,
+          height: 630,
+          alt: post.title || HERO_IMAGE.alt,
+        },
+      ],
+    },
+  }
+}
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -21,8 +57,29 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   const comments = await getCommentsByPost(post.id)
 
+  const token = await getAuthToken()
+  const user = token ? await getUser() : null
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.coverImage || HERO_IMAGE.src,
+    datePublished: post.createdAt,
+    dateModified: post.updatedAt,
+    author: {
+      '@type': 'Person',
+      name: post.author?.name,
+    },
+  }
+
   return (
     <main className="w-full">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="relative flex min-h-[70vh] w-full flex-col justify-end overflow-hidden pb-16 pt-32">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 z-10 bg-ink/50" />
@@ -73,28 +130,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <Markdown>{post.content}</Markdown>
         </div>
         <div className="mt-16 border-t border-border pt-8">
-          {comments.items.length < 1 ? (
-            <>
-              <p className="font-sans font-bold text-ink">Nenhum comentário.</p>
-            </>
-          ) : (
-            <>
-              <p className="font-sans font-bold text-ink">
-                {comments.items.length || 0} comentários
-              </p>
-              {comments.items.map((comment) => (
-                <div key={comment.id} className="mt-4 border border-muted/20 rounded-xl shadow-xl">
-                  <p className="text-md text-ink/80 p-4">{comment.content}</p>
-                  <div className=" flex flex-col justify-end items-end mt-6 border-t border-muted/50 py-4 bg-primary ">
-                    <p className="font-sans font-bold text-on-dark px-4">{comment.author.name}</p>
-                    <span className="text-sm text-on-dark/60 px-4">
-                      {formattedDate(comment.createdAt)}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </>
-          )}
+          <CommentsSection initialComments={comments} postId={post.id} user={user} />
         </div>
       </article>
     </main>
