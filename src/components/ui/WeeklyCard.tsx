@@ -12,7 +12,13 @@ export function WeeklyCard({ post }: { post: Post }) {
     >
       <div className="relative w-full h-[60%] sm:h-[60%] shrink-0">
         {post.coverImage && (
-          <Image src={post.coverImage} alt={post.title} fill className="object-cover" />
+          <Image
+            src={post.coverImage}
+            alt={post.title}
+            fill
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-cover"
+          />
         )}
       </div>
 
@@ -29,7 +35,7 @@ export function WeeklyCard({ post }: { post: Post }) {
           {post.excerpt}
         </p>
 
-        <div className="mt-auto text-accent text-md font-bold uppercase tracking-widest flex items-center gap-1 group-hover:text-accent-hover transition-colors">
+        <div className="mt-auto text-[#cfae80] text-md font-bold uppercase tracking-widest flex items-center gap-1 group-hover:text-accent-hover transition-colors">
           Ler matéria <MoveRight className="w-4 h-4" />
         </div>
       </div>

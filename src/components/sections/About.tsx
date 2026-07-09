@@ -13,13 +13,14 @@ export function About() {
             src="/images/about/about_2.webp"
             alt="Igreja matriz"
             fill
+            sizes="(min-width: 1024px) 58vw, 100vw"
             className="object-[70%_center] object-cover rounded-lg shadow-lg"
           />
         </div>
 
         {/* Lado Direito: Card de Texto Sobreposto */}
         <div className="w-11/12 sm:w-full lg:w-6/12 bg-surface p-8 sm:p-12 lg:p-16 shadow-2xl z-10 mt-12.5 lg:mt-0 lg:-ml-24">
-          <p className="text-accent font-display text-xs uppercase tracking-[0.2em] mb-3">
+          <p className="text-[#776040] font-display text-xs uppercase tracking-[0.2em] mb-3">
             Quem faz o Cidade Viva
           </p>
           <h2 className="text-ink font-display text-[2.3rem] lg:text-5xl font-extrabold uppercase tracking-wide leading-tight mb-6">

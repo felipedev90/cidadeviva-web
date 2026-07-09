@@ -2,7 +2,7 @@ export function Newsletter() {
   return (
     <section className="bg-primary py-16 md:py-24 px-4 w-full flex flex-col items-center justify-center text-center">
       <div className="max-w-3xl w-full flex flex-col items-center">
-        <p className="text-accent font-display text-xs font-bold uppercase tracking-[0.2em] mb-3">
+        <p className="text-[#cfae80] font-display text-xs font-bold uppercase tracking-[0.2em] mb-3">
           Newsletter Semanal
         </p>
         <h2 className="text-on-dark font-display text-3xl md:text-4xl font-bold uppercase tracking-wider mb-4">
