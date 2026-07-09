@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { DeletePostButton } from '@/components/ui/DeletePostButton'
 import { getMyPosts } from '@/lib/api/posts'
 import { getUser } from '@/lib/api/user'
+import { cn } from '@/lib/cn/cn'
 import { formattedDate } from '@/lib/formattedDate/formattedDate'
 
 export default async function DashboardPage() {
@@ -59,7 +60,12 @@ export default async function DashboardPage() {
               <div className="flex items-start justify-between gap-2">
                 <p className="font-sans text-sm font-bold text-ink">{post.title}</p>
                 <span
-                  className={`shrink-0 font-sans text-xs font-bold uppercase px-2 py-1 ${post.published ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}
+                  className={cn(
+                    'shrink-0 font-sans text-xs font-bold uppercase px-2 py-1',
+                    post.published
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-yellow-100 text-yellow-700',
+                  )}
                 >
                   {post.published ? 'Publicado' : 'Rascunho'}
                 </span>
@@ -115,7 +121,12 @@ export default async function DashboardPage() {
                 </td>
                 <td className="px-6 py-4">
                   <span
-                    className={`font-sans text-xs font-bold uppercase px-3 py-1 ${post.published ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}
+                    className={cn(
+                      'font-sans text-xs font-bold uppercase px-3 py-1',
+                      post.published
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-yellow-100 text-yellow-700',
+                    )}
                   >
                     {post.published ? 'Publicado' : 'Rascunho'}
                   </span>

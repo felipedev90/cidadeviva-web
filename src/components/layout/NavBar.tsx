@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { NAV_BAR_DATA } from '@/data/nav'
 import { logout } from '@/lib/actions/logout'
+import { cn } from '@/lib/cn/cn'
 
 type NavBarProps = {
   user: { name: string; email: string } | null
@@ -149,9 +150,10 @@ export function NavBar({ user }: NavBarProps) {
           aria-modal="true"
           aria-label="Menu de navegação"
           aria-hidden={!isOpen}
-          className={`bg-transparent fixed inset-0 z-40 transition-transform duration-300 lg:hidden ${
-            isOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
+          className={cn(
+            'bg-transparent fixed inset-0 z-40 transition-transform duration-300 lg:hidden',
+            isOpen ? 'translate-x-0' : 'translate-x-full',
+          )}
         >
           <nav
             aria-label="Navegação mobile"

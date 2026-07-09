@@ -1,59 +1,76 @@
-# Next.js Template
+# Cidade Viva
 
-Personal Next.js starter template with strict tooling, designed for production-grade projects.
+Blog independente sobre a vida em Jundiaí — a terra da uva. Cobre o que dá pra fazer, comer, pedalar e viver na cidade, com matérias organizadas por categoria (ciclismo, gastronomia, cultura e eventos), sistema de comentários e um painel para gerenciar publicações.
 
 ## Stack
 
 - **Framework**: Next.js 16 (App Router) + React 19
-- **Language**: TypeScript 5 (strict + noUncheckedIndexedAccess)
-- **Styling**: Tailwind CSS v4 (CSS-first with `@theme inline`)
-- **Tooling**: ESLint 9 (flat config), Prettier, Husky, lint-staged, commitlint
-- **CI/CD**: GitHub Actions
+- **Linguagem**: TypeScript 5 (strict + `noUncheckedIndexedAccess`)
+- **Estilo**: Tailwind CSS v4 (CSS-first com `@theme inline`)
+- **Dados**: TanStack Query, React Hook Form + Zod
+- **Qualidade**: ESLint 9 (flat config), Prettier, Husky, lint-staged, commitlint
 
-## What's included
+## Funcionalidades
 
-- ✅ TypeScript strict configuration with extra rules
-- ✅ ESLint 9 flat config integrated with Prettier
-- ✅ Husky + lint-staged blocking bad commits
-- ✅ Conventional Commits enforced via commitlint
-- ✅ GitHub Actions CI (format, lint, typecheck, build)
-- ✅ Folder structure (`components/ui`, `components/sections`, `components/layout`, `data`, `types`, `lib`, `hooks`)
-- ✅ `cn()` utility for class merging
-- ✅ Modern browserslist config
+- Página inicial com destaques, lista de posts paginada por categoria e newsletter
+- Página de post individual (`/posts/[slug]`)
+- Comentários (criar, editar e excluir) via React Query
+- Autenticação (login/registro) e área de dashboard protegida
+- CRUD de posts pelo dashboard (`/dashboard/posts/new`, `/dashboard/posts/[slug]/edit`)
+- SEO: `robots.ts` e `sitemap.ts` gerados dinamicamente
 
-## What's NOT included (intentionally)
+O front-end consome uma API externa (posts, comentários e autenticação) configurada via `API_URL`.
 
-- No design system — add yours
-- No components — add yours
-- No data — add yours
+## Como rodar
 
-## Usage
+```bash
+npm install
+npm run dev
+```
 
-Click **Use this template** at the top of the GitHub page, or:
+Crie um `.env.local` na raiz com a URL da API:
 
 ```
-npx create-next-app@latest my-app --use-template felipedev90/nextjs-template
+API_URL=http://localhost:xxxx
 ```
+
+Acesse [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Script                 | Description                       |
-| ---------------------- | --------------------------------- |
-| `npm run dev`          | Development server with Turbopack |
-| `npm run build`        | Production build                  |
-| `npm run lint`         | Run ESLint                        |
-| `npm run lint:fix`     | ESLint with auto-fix              |
-| `npm run typecheck`    | TypeScript check                  |
-| `npm run format`       | Format with Prettier              |
-| `npm run format:check` | Check formatting                  |
+| Script                 | Descrição                      |
+| ---------------------- | ------------------------------ |
+| `npm run dev`          | Servidor de desenvolvimento    |
+| `npm run build`        | Build de produção              |
+| `npm run start`        | Serve o build de produção      |
+| `npm run lint`         | Roda o ESLint                  |
+| `npm run lint:fix`     | ESLint com auto-fix            |
+| `npm run typecheck`    | Checagem de tipos (TypeScript) |
+| `npm run format`       | Formata com Prettier           |
+| `npm run format:check` | Verifica formatação            |
 
-## Conventions
+## Estrutura de pastas
 
-- Conventional Commits with required scope (`feat(scope): description`)
+```
+src/
+├── app/                  # Rotas (App Router): (public), (auth), (dashboard), api/
+├── components/
+│   ├── ui/               # Primitivos reutilizáveis
+│   ├── sections/         # Composições específicas de página
+│   ├── layout/           # Nav, MenuOverlay, etc.
+│   └── providers/        # Providers globais (React Query, etc.)
+├── data/                 # Fonte única de dados estáticos (constants)
+├── types/                # Tipagens compartilhadas
+├── lib/                  # Utilities puras e client de API
+└── hooks/                # Custom hooks
+```
+
+## Convenções
+
+- Conventional Commits com scope obrigatório em kebab-case (`feat(hero): add cta button`)
 - Branches: `feat/*`, `fix/*`, `chore/*`, `refactor/*`, `test/*`
-- TypeScript: `type` over `interface`, `import type` for type-only imports
-- Data files use `as const satisfies Type`
+- Componentes em PascalCase; demais arquivos em kebab-case
+- Conteúdo/strings para o usuário em pt-BR; identificadores em inglês
+- Dados estáticos com `as const satisfies Type`
 
----
-
-Built by [Felipe Augusto](https://devfelipeaugusto.com.br)
+Veja [AGENTS.md](AGENTS.md) para o guia completo de convenções do projeto.
