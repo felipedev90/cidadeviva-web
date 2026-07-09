@@ -1,10 +1,12 @@
 import { apiFetch } from './client'
 
-export async function getUser(): Promise<{ name: string; email: string }> {
+export async function getUser(): Promise<{ id: string; name: string; email: string }> {
   const {
     data: {
-      user: { name, email },
+      user: { _id: id, name, email },
     },
-  } = await apiFetch<{ data: { user: { name: string; email: string } } }>('/api/v1/auth/me')
-  return { name, email }
+  } = await apiFetch<{ data: { user: { _id: string; name: string; email: string } } }>(
+    '/api/v1/auth/me',
+  )
+  return { id, name, email }
 }
