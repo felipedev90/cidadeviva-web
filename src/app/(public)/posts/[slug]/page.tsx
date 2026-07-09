@@ -1,4 +1,5 @@
 import { ArrowLeft } from 'lucide-react'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -11,6 +12,38 @@ import { getCommentsByPost } from '@/lib/api/comments'
 import { getPostBySlug } from '@/lib/api/posts'
 import { getUser } from '@/lib/api/user'
 import { formattedDate } from '@/lib/formattedDate/formattedDate'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+
+  let post
+  try {
+    post = await getPostBySlug(slug)
+  } catch {
+    notFound()
+  }
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      images: [
+        {
+          url: post.coverImage || HERO_IMAGE.src,
+          width: 1200,
+          height: 630,
+          alt: post.title || HERO_IMAGE.alt,
+        },
+      ],
+    },
+  }
+}
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -27,8 +60,26 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const token = await getAuthToken()
   const user = token ? await getUser() : null
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.coverImage || HERO_IMAGE.src,
+    datePublished: post.createdAt,
+    dateModified: post.updatedAt,
+    author: {
+      '@type': 'Person',
+      name: post.author?.name,
+    },
+  }
+
   return (
     <main className="w-full">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="relative flex min-h-[70vh] w-full flex-col justify-end overflow-hidden pb-16 pt-32">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 z-10 bg-ink/50" />

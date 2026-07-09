@@ -21,6 +21,23 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Cidade Viva',
   description: 'Cultura urbana, ciclismo e lifestyle de Jundiaí, contados por quem vive a cidade.',
+
+  openGraph: {
+    title: 'Cidade Viva',
+    description:
+      'Cultura urbana, ciclismo e lifestyle de Jundiaí, contados por quem vive a cidade.',
+    url: 'https://cidadeviva-web.vercel.app',
+    siteName: 'Cidade Viva',
+    images: [
+      {
+        url: 'https://cidadeviva-web.vercel.app/og-image.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'pt-BR',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({
