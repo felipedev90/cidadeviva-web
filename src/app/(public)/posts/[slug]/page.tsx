@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Markdown from 'react-markdown'
 
+import { QueryProvider } from '@/components/providers/QueryProvider'
 import { CommentsSection } from '@/components/sections/CommentSection'
 import { HERO_IMAGE } from '@/data/hero'
 import { getAuthToken } from '@/lib/api/auth'
@@ -130,7 +131,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <Markdown>{post.content}</Markdown>
         </div>
         <div className="mt-16 border-t border-border pt-8">
-          <CommentsSection initialComments={comments} postId={post.id} user={user} />
+          <QueryProvider>
+            <CommentsSection initialComments={comments} postId={post.id} user={user} />
+          </QueryProvider>
         </div>
       </article>
     </main>

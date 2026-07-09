@@ -1,7 +1,6 @@
 'use client'
 
 import { LogOut, Menu, NotebookPen, Search, User, X } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
@@ -39,14 +38,6 @@ export function NavBar({ user }: NavBarProps) {
   return (
     <header className="fixed top-0 z-50 w-full flex items-center justify-between bg-primary/90 px-6 py-4 backdrop-blur-xl">
       <div className="flex gap-4">
-        <Image
-          src="/images/navbar/logo.webp"
-          alt="Ponte torta"
-          width={100}
-          height={100}
-          priority
-          className="rounded-full hidden md:block"
-        />
         <div className="z-50">
           <Link
             href="/"
@@ -54,7 +45,7 @@ export function NavBar({ user }: NavBarProps) {
           >
             Cidade <span className="text-accent">Viva</span>
           </Link>
-          <p className="text-on-dark/60 uppercase tracking-widest font-display">Jundiaí - SP</p>
+          <p className="text-on-dark/70 uppercase tracking-widest font-display">Jundiaí - SP</p>
         </div>
       </div>
       <nav aria-label="Navegação principal" className="hidden items-center gap-8 font-bold lg:flex">
@@ -77,7 +68,11 @@ export function NavBar({ user }: NavBarProps) {
       <div className="flex items-center gap-6">
         {user ? (
           <>
-            <Link href="/dashboard" className="text-on-dark lg:hidden z-50">
+            <Link
+              href="/dashboard"
+              className="text-on-dark lg:hidden z-50"
+              aria-label="Ir para o painel"
+            >
               <User size={24} />
             </Link>
             <div className="hidden lg:flex items-center gap-8">
@@ -122,7 +117,11 @@ export function NavBar({ user }: NavBarProps) {
             >
               Login
             </Link>
-            <Link href="/auth/login" className="text-on-dark lg:hidden z-50">
+            <Link
+              href="/auth/login"
+              className="text-on-dark lg:hidden z-50"
+              aria-label="Ir para login"
+            >
               <User size={24} />
             </Link>
             <Link

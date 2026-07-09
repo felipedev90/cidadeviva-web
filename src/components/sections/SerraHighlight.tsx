@@ -8,7 +8,7 @@ export function SerraHighlight() {
     <div className="bg-border min-h-[70vh] flex items-center justify-center p-6 md:p-10">
       <div className="bg-surface shadow-2xl overflow-hidden max-w-7xl w-full flex flex-col md:flex-row">
         <div className="bg-primary p-10 md:p-16 flex flex-col gap-8 md:w-1/2">
-          <p className="text-sm md:text-base uppercase font-display tracking-widest text-accent opacity-90 text-center md:text-left">
+          <p className="text-sm md:text-base uppercase font-display tracking-widest text-[#cfae80] text-center md:text-left">
             Categoria em foco
           </p>
           <h2 className="text-4xl md:text-5xl font-display uppercase tracking-wide text-on-dark text-center md:text-left">
@@ -46,6 +46,7 @@ export function SerraHighlight() {
             src="/images/serra-highlight/serra_highlight.webp"
             alt="Cachoeira na Serra do Japi"
             fill
+            sizes="(min-width: 768px) 50vw, 100vw"
             className=" object-cover"
           />
         </div>

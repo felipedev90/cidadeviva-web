@@ -12,7 +12,13 @@ export function PostCard({ post }: { post: Post }) {
     >
       <div className="relative w-full h-64">
         {post.coverImage && (
-          <Image src={post.coverImage} alt={post.title} fill className="object-cover" />
+          <Image
+            src={post.coverImage}
+            alt={post.title}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover"
+          />
         )}
         {post.category && (
           <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-accent text-ink font-sans text-xs font-bold uppercase tracking-wider">
@@ -22,7 +28,7 @@ export function PostCard({ post }: { post: Post }) {
       </div>
 
       <div className="p-6 flex flex-col gap-4">
-        <div className="text-muted font-sans text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
+        <div className="text-[#6e6a60] font-sans text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
           <span>{formattedDate(post.createdAt)}</span>
         </div>
 

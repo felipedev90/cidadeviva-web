@@ -10,6 +10,12 @@ const ICON_MAP = {
   portfolio: Globe,
 }
 
+const LABEL_MAP = {
+  github: 'Abrir GitHub',
+  linkedin: 'Abrir LinkedIn',
+  portfolio: 'Abrir portfólio',
+}
+
 export function Footer() {
   return (
     <footer className="bg-primary-hover font-display">
@@ -31,6 +37,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={LABEL_MAP[social.platform]}
                   className="border border-on-dark/20 p-4 rounded-full text-on-dark"
                 >
                   <Icon />
