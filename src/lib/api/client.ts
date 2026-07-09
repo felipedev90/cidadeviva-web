@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers'
 
-import { clearAuthAndRedirect } from './auth'
+import { redirectToLogin } from './auth'
 
 export async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const cookieStore = await cookies()
@@ -23,7 +23,7 @@ export async function apiFetch<T>(endpoint: string, options?: RequestInit): Prom
   })
 
   if (response.status === 401) {
-    await clearAuthAndRedirect()
+    await redirectToLogin()
   }
 
   if (!response.ok) {
