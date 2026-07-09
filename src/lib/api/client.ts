@@ -30,6 +30,9 @@ export async function apiFetch<T>(endpoint: string, options?: RequestInit): Prom
     throw new Error(`Erro ${response.status} em ${endpoint}`)
   }
 
+  if (response.status === 204) {
+    return undefined as unknown as T
+  }
   const json = await response.json()
   return json
 }
