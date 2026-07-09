@@ -125,7 +125,10 @@ function CommentItem({
   }
 
   return (
-    <div className="mt-4 border border-muted/20 rounded-xl shadow-xl">
+    <div
+      data-testid={`comment-${comment.id}`}
+      className="mt-4 border border-muted/20 rounded-xl shadow-xl"
+    >
       {isEditing ? (
         <div className="p-4">
           <textarea
@@ -155,10 +158,18 @@ function CommentItem({
         <span className="text-sm text-on-dark/60 px-4">{formattedDate(comment.createdAt)}</span>
         {isOwner && !isEditing && (
           <div className="flex gap-3 px-4 mt-2">
-            <button onClick={onStartEdit} className="text-on-dark/80 text-sm hover:text-on-dark">
+            <button
+              onClick={onStartEdit}
+              aria-label="Editar comentário"
+              className="text-on-dark/80 text-sm hover:text-on-dark"
+            >
               <Pen className="h-5 w-5" />
             </button>
-            <button onClick={handleDelete} className="text-red-400 text-sm hover:text-red-300">
+            <button
+              onClick={handleDelete}
+              aria-label="Excluir comentário"
+              className="text-red-400 text-sm hover:text-red-300"
+            >
               <Trash2 className="h-5 w-5" />
             </button>
           </div>

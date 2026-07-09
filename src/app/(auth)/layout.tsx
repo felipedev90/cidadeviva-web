@@ -1,10 +1,10 @@
 import { Footer } from '@/components/layout/Footer'
-import { NavBarServer } from '@/components/layout/NavBarServer'
+import { NavBar } from '@/components/layout/NavBar'
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <NavBarServer />
+      <NavBar user={null} />
       {children}
       <Footer />
     </>
